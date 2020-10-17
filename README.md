@@ -1,3 +1,10 @@
+## Tutorials
+
+https://egghead.io/courses/getting-started-with-redux
+https://learn.freecodecamp.org/front-end-libraries/redux
+
+## Title
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

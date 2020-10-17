@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import expect from 'expect'
+import { createStore } from 'redux'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,7 +12,32 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+expect(1).toEqual(1)
+
+const counter = (state = 0, action) => {
+  switch (action.type){
+    case 'INCREMENT':
+      return state + 1 
+    case 'DECREMENT':
+      return state - 1
+    default:
+      return state
+  }
+}
+
+const store = createStore(counter);
+
+const appDiv = document.querySelector('.App')
+
+const render = () => {
+  appDiv.innerText = store.getState();
+};
+
+store.subscribe(render)
+render()
+
+appDiv.addEventListener('click',() => {
+  store.dispatch({type:'INCREMENT'})
+})
+
+
