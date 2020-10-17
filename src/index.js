@@ -2,17 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import expect from 'expect'
 import { createStore } from 'redux'
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-expect(1).toEqual(1)
 
 const counter = (state = 0, action) => {
   switch (action.type){
@@ -27,17 +17,29 @@ const counter = (state = 0, action) => {
 
 const store = createStore(counter);
 
-const appDiv = document.querySelector('.App')
+function onIncrement() {
+  store.dispatch({
+    type:'INCREMENT'
+  })
+}
+function onDecrement() {
+  store.dispatch({
+    type:'DECREMENT'
+  })
+}
+
 
 const render = () => {
-  appDiv.innerText = store.getState();
-};
-
+  ReactDOM.render(
+    <React.StrictMode>
+      <App 
+        value={store.getState()}
+        onIncrement={onIncrement}
+        onDecrement={onDecrement}
+      />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
 store.subscribe(render)
 render()
-
-appDiv.addEventListener('click',() => {
-  store.dispatch({type:'INCREMENT'})
-})
-
-
