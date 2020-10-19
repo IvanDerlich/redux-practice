@@ -14,27 +14,36 @@ ReactDOM.render(
     document.getElementById('root')
   );
 
+const todo = (todoState, action) => {
+  switch (action.type){
+    case 'ADD_TODO':
+      return {
+        id: action.id,
+        text: action.text,
+        completed: false,
+      }
+    case 'TOGGLE_TODO':
+      if( todoState.id !== action.id){
+        return todoState;
+      }
+      return {
+        ...todoState,
+        completed: true
+      }
+    default:
+      return todoState
+  }
+}
+
 const todos = (state = [], action) => {
   switch(action.type){
     case 'ADD_TODO':
       return [
         ...state,
-        {
-          id: action.id,
-          text: action.text,
-          completed: false,
-        }
+        todo(undefined,action)
       ]
     case 'TOGGLE_TODO':
-      return state.map(todo => {
-        if( todo.id !== action.id){
-          return todo;
-        }
-        return {
-          ...todo,
-          completed: true
-        }
-      })
+      return state.map(t => todo(t, action))
     default:
       return state;
   }
