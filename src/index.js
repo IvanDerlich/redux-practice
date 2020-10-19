@@ -5,7 +5,7 @@ import App from './App';
 import { createStore } from 'redux'
 import expect from 'expect'
 import deepFreeze from 'deep-freeze'
-import {testIncrementCounter, testAddcounter, testRemoveCounter} from './arrayfunctions'
+import {testIncrementCounter, testAddcounter, testRemoveCounter} from './functions/arrayfunctions'
 
 
 
@@ -68,7 +68,6 @@ const testToggleTodo = () => {
     completed: true,
   }
   deepFreeze(todoBefore);
-
 
   expect(
     toggleTodo(todoBefore)
