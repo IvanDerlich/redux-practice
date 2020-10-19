@@ -5,79 +5,52 @@ import App from './App';
 import { createStore } from 'redux'
 import expect from 'expect'
 import deepFreeze from 'deep-freeze'
-import {testIncrementCounter, testAddcounter, testRemoveCounter} from './functions/arrayfunctions'
 
 
-
-const counter = (state = 0, action) => {
-  switch (action.type){
-    case 'INCREMENT':
-      return state + 1 
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
-}
-
-const store = createStore(counter);
-
-function onIncrement() {
-  store.dispatch({
-    type:'INCREMENT'
-  })
-}
-function onDecrement() {
-  store.dispatch({
-    type:'DECREMENT'
-  })
-}
-
-const render = () => {
-  ReactDOM.render(
+ReactDOM.render(
     <React.StrictMode>
-      <App 
-        value={store.getState()}
-        onIncrement={onIncrement}
-        onDecrement={onDecrement}
-      />
+      <App />
     </React.StrictMode>,
     document.getElementById('root')
   );
-}
-store.subscribe(render)
-render()
 
-const toggleTodo = (todo) => {
-  return {
-    ...todo
-    ,completed: !todo.com
+const todos = (state = [], action) => {
+  switch(action.type){
+    case 'ADD_TODO':
+      return [
+        ...state,
+        {
+          id: action.id,
+          text: action.text,
+          completed: false,
+        }
+      ]    
+    default:
+      return state;
   }
 }
 
-const testToggleTodo = () => {
-  const todoBefore = {
+const testAddtodo = () => {
+  const stateBefore = [];
+  const action = {
+    type: 'ADD_TODO',
     id: 0,
-    text: 'Learn Redux',
+    text: 'Learn Redux'
+  }
+  const stateAfter = [
+    {
+    id: 0,
+    text: "Learn Redux",
     completed: false,
-  };
-
-  const todoAfter = {
-    id: 0,
-    text: 'Learn Redux',
-    completed: true,
-  }
-  deepFreeze(todoBefore);
-
+    }
+  ]
+  deepFreeze(stateBefore);
+  deepFreeze(action);
   expect(
-    toggleTodo(todoBefore)
-  ).toEqual(todoAfter);
+    todos(stateBefore,action)
+  ).toEqual(stateAfter)
+    
 }
 
-
-testAddcounter();
-testRemoveCounter();
-testIncrementCounter();
-testToggleTodo()
-
+testAddtodo()
 console.log('All tests passed.');
