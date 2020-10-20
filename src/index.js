@@ -31,7 +31,7 @@ const todo = (todoState, action) => {
         completed: true
       }
     default:
-      return todoState
+      return todoState 
   }
 }
 
