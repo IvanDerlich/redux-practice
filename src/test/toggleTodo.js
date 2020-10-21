@@ -1,6 +1,6 @@
 import expect from 'expect'
 import deepFreeze from 'deep-freeze'
-import todos from '../reducers/todos'
+import todos from '../functions/reducers/todos'
 
 const testToggleTodo = () => {
   const stateBefore = [
