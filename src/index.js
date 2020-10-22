@@ -1,25 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import { createStore } from 'redux'
 import todoApp from './objects/todoApp'
-import testAddTodo from './test/addTodo';
-import testToggleTodo from './test/toggleTodo';
+// import tests from './test/index';
 import consolePlay from './functions/consolePlay'
+import render from './functions/render'
 
-
-ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
+// tests();
 
 const store = createStore(todoApp)
+store.subscribe(() => render(store));
+render(store);
+
 
 consolePlay(store);
-
-testAddTodo()
-testToggleTodo()
-console.log('All tests passed.');

@@ -17,7 +17,7 @@ const consolePlay = (store) => {
   console.log('Dispatching ADD_TODO');
   store.dispatch({
     type: 'ADD_TODO',
-    id: 0,
+    id: 1,
     text: 'Go Shopping'
   });
 
