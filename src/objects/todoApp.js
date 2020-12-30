@@ -1,3 +1,7 @@
+//https://redux.js.org/recipes/structuring-reducers/using-combinereducers
+//https://redux.js.org/api/combinereducers
+
+
 import { combineReducers } from 'redux';
 import todos from '../functions/reducers/todos'
 import visibilityFilter from '../functions/reducers/visibilityFilter'
